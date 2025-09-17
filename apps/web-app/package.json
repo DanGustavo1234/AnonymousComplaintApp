@@ -1,0 +1,41 @@
+{
+    "name": "monorepo-ethers-web-app",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@radix-ui/react-label": "^2.1.7",
+        "@radix-ui/react-slot": "^1.2.3",
+        "@semaphore-protocol/core": "4.13.1",
+        "@semaphore-protocol/data": "4.13.1",
+        "@semaphore-protocol/utils": "4.13.1",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "ethers": "^6.13.4",
+        "lucide-react": "^0.544.0",
+        "next": "14.1.0",
+        "next-pwa": "^5.6.0",
+        "react": "^18",
+        "react-dom": "^18",
+        "tailwind-merge": "^3.3.1",
+        "tailwindcss-animate": "^1.0.7"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "autoprefixer": "^10.4.21",
+        "dotenv": "^16.4.5",
+        "eslint": "^8",
+        "eslint-config-next": "14.1.0",
+        "postcss": "^8.5.6",
+        "tailw": "^0.2.0",
+        "tailwindcss": "^3.4.0",
+        "typescript": "^5"
+    }
+}
