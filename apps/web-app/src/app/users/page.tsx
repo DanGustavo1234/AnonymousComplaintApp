@@ -15,13 +15,34 @@ import { Label } from "@/components/ui/label"
 import {Alert,AlertDescription,AlertTitle} from "@/components/ui/alert"
 import { useState } from "react";
 import { CheckCircle2Icon } from "lucide-react";
+import { Identity } from "@semaphore-protocol/core"
+import { useLogContext } from "@/context/LogContext"
+import { useEffect } from "react"
+// bcrypt
+import bcrypt from "bcryptjs"
+
 
 export default function UsersPage() {
     const router = useRouter()
 
     const [dni, setDni] = useState("");
     const [isValid, setIsValid] = useState<boolean | null>(null);
+    const {setLog} = useLogContext()
+    const [_identity, setIdentity] = useState<Identity>()
+    const [stateIdentity, setStateIdentity] = useState<boolean>(false)
 
+    // Create identity
+    const createIdentity = (dni: string) => async () => {
+        const identity = new Identity(await bcrypt.hash(dni, 10))
+
+        setIdentity(identity)
+
+        setStateIdentity(true)
+
+        console.log("Identidad",_identity)
+
+        localStorage.setItem("identity", identity.export())
+    }
     
     const isValidEcuadorianDNI = (dni: string) => {
         if (!/^\d{10}$/.test(dni)) return false;
@@ -39,6 +60,7 @@ export default function UsersPage() {
         const checkDigit = (10 - (sum % 10)) % 10;
         return checkDigit === digits[9];
       };
+
 
     return (
         <>
@@ -96,9 +118,18 @@ export default function UsersPage() {
             {isValid && (
                 <Button 
                     className="button" 
-                    onClick={() => router.push("/identities")}
+                    onClick={createIdentity(dni)}
                 >
-                    Continue to Identities
+                    Create Identity
+                </Button>
+            )}
+            {/* Next step */}
+            {stateIdentity && (
+                <Button 
+                    className="button" 
+                    onClick={() => router.push("/group")}
+                >
+                    Next
                 </Button>
             )}
         </CardFooter>
